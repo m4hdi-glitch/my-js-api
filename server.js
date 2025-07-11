@@ -1,10 +1,10 @@
 const express = require('express');
-const cors = require('cors'); // 👈 Add this line
+const cors = require('cors');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // 🔁 Use Render’s port if available
 
 // Enable CORS
-app.use(cors()); // 👈 Add this line
+app.use(cors());
 
 const userData = {
   name: "Luna",
@@ -12,6 +12,12 @@ const userData = {
   hobby: "Drawing"
 };
 
+// Root route
+app.get('/', (req, res) => {
+  res.send('🎉 Your API is working! Try /api/profile');
+});
+
+// API route
 app.get('/api/profile', (req, res) => {
   res.json(userData);
 });
